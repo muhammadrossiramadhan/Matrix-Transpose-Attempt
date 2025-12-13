@@ -91,6 +91,5 @@ Jika ada pertanyaan atau saran, silakan buka *Issue* di repositori ini.
 ---
 
 ## 🎉 Penutup
-
-![Yvette Strinova] (yvette-strinova.gif)
+![Yvette Strinova](https://media.tenor.com/B-hOUdGo4s4AAAAi/yvette-strinova.gif)
 Enjoy for testing and experiment.
