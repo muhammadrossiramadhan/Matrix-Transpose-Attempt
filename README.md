@@ -1,10 +1,4 @@
-Ini adalah versi final **README.md** yang sudah diperbarui.
 
-Saya telah mengganti bagian penutup dengan **Opsi 2** (GIF Anime ukuran besar) sesuai permintaanmu, digabungkan dengan struktur "Ultimate Hybrid" yang lengkap (Target Pro + Pemula).
-
-Silakan **Copy** dan **Paste** seluruh kode di bawah ini ke file `README.md` repositori GitHub kamu.
-
-```markdown
 # 🚀 Matrix Transpose: Project C Multi-File
 
 ![Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)
