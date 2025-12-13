@@ -1,12 +1,13 @@
-
-
 # 🚀 Panduan Proyek Matriks Transpose dengan Multi-File C
 
 Proyek ini mendemonstrasikan manajemen memori dinamis di C untuk operasi array 1D dan matriks 2D (transpose) menggunakan kompilasi multi-file (`latihan.c` dan `operasi.c`) dengan `Makefile`.
 
+> [!NOTE]
+> Proyek ini dirancang untuk tujuan pembelajaran (edukasi), khususnya bagi yang ingin memahami bagaimana **alokasi memori** (`malloc`) bekerja dan cara membagi kode C menjadi beberapa file agar lebih rapi.
+
 ## 📂 Struktur Repositori
 
-```
+```text
 /Tugas dan Latihan Alpro
 ├── latihan.c           # File utama (main function, alokasi memori Matriks A)
 ├── operasi.c           # Implementasi fungsi (printArray, printMatrix, alokasi Matriks B)
@@ -17,52 +18,88 @@ Proyek ini mendemonstrasikan manajemen memori dinamis di C untuk operasi array 1
 
 -----
 
-## 🛠️ Persyaratan Sistem
+## 🛠️ Persyaratan Sistem (Apa yang harus disiapkan?)
 
-Untuk menjalankan proyek ini, Anda membutuhkan:
+Sebelum memulai, pastikan komputer kamu memiliki alat-alat berikut. Jika kamu menggunakan Linux (Ubuntu/Fedora) atau WSL (Windows Subsystem for Linux), biasanya ini sudah tersedia.
 
 1.  **Compiler C:** GCC (GNU Compiler Collection).
-2.  **Make Tool:** Untuk menjalankan `Makefile` (biasanya sudah termasuk dalam sistem Linux/Fedora).
-3.  **(Opsional, Sangat Disarankan)** **Valgrind:** Alat untuk memeriksa kesalahan memori (*memory leak* dan *corruption*).
+2.  **Make Tool:** Untuk menjalankan perintah `make`.
+3.  **Terminal:** Aplikasi Command Prompt atau Terminal di Linux/Mac.
+
+> [!TIP]
+> **Cara Cek Apakah Komputer Kamu Sudah Siap:**
+> 1. Buka terminal.
+> 2. Ketik `gcc --version` lalu Enter.
+> 3. Ketik `make --version` lalu Enter.
+>
+> Jika muncul tulisan versi (misal `gcc (Ubuntu...) 9.4.0`), berarti kamu **aman**! Jika muncul "command not found", kamu perlu menginstalnya dulu.
+
+-----
 
 ## 💻 Panduan Menjalankan Program (Untuk Pemula)
 
-Ikuti langkah-langkah di bawah ini untuk mengkompilasi, menjalankan, dan membersihkan proyek Anda.
+Ikuti langkah-langkah di bawah ini secara berurutan. Jangan khawatir, kita akan melakukannya perlahan.
 
-### Tahap 1: Kompilasi Proyek
+### Tahap 1: Masuk ke Folder Proyek
 
-Kita menggunakan `Makefile` untuk mengkompilasi file `latihan.c` dan `operasi.c` menjadi satu *executable* bernama `latihan_matriks`.
+Pastikan kamu sudah mendownload kode ini. Jika mendownload sebagai ZIP, ekstrak dulu. Lalu buka terminal di dalam folder tersebut.
 
-1.  **Buka Terminal** di direktori proyek (`Tugas dan Latihan Alpro`).
-2.  **Jalankan `make`**:
+### Tahap 2: Kompilasi Proyek (Membuat Program)
+
+Kita tidak akan mengkompilasi file satu per satu secara manual. Kita akan menggunakan `Makefile` agar otomatis.
+
+1.  Di dalam terminal, ketik perintah berikut lalu tekan **Enter**:
     ```bash
     make
     ```
-    *(Jika `make` gagal, pastikan Anda telah mengganti semua indentasi di `Makefile` dengan karakter **TAB**.)*
+2.  Jika berhasil, tidak akan ada pesan error, dan akan muncul file baru bernama `latihan_matriks`.
 
-### Tahap 2: Menjalankan Program
+> [!WARNING]
+> **Penting Soal `Makefile`**
+> Jika kamu mencoba mengedit file `makefile` sendiri dan mendapat pesan error `missing separator`, itu biasanya karena masalah spasi.
+> Pastikan baris perintah di dalam `makefile` (seperti di bawah `all:` atau `clean:`) menggunakan tombol **TAB**, bukan spasi biasa.
 
-Setelah kompilasi berhasil, file *executable* akan dibuat.
+### Tahap 3: Menjalankan Program
 
-1.  **Jalankan *executable***:
+Sekarang program sudah siap dijalankan.
+
+1.  Ketik perintah ini di terminal:
     ```bash
     ./latihan_matriks
     ```
-2.  **Ikuti Prompt Input**:
-      * Program akan meminta jumlah baris/elemen (N).
-      * Program akan meminta N elemen untuk diisi ke array 1D.
-      * Program akan meminta jumlah kolom (M) untuk Matriks A.
+2.  Program akan berjalan dan meminta input dari kamu.
 
-### Tahap 3: Output dan Hasil
+> [!CAUTION]
+> **Hati-hati Saat Input Data**
+> Masukkan hanya **angka bulat** (integer) saat program meminta input. Jangan memasukkan huruf atau simbol aneh, karena program bisa berhenti mendadak (*crash*).
 
-  * Program akan menampilkan konfirmasi `Berhasil dibuat matriks A` dan `Berhasil dibuat matriks B`.
-  * Dua file teks akan dibuat di direktori proyek:
-      * `matriksA.txt` (Berisi Matriks A, ukuran N x M).
-      * `matriksB.txt` (Berisi Matriks B, yaitu transpose dari Matriks A, ukuran M x N).
+**Alur Input Program:**
+1.  **Masukkan N:** Jumlah total elemen (misal: `6`).
+2.  **Masukkan Elemen:** Masukkan angka sebanyak N kali (misal: `10`, `20`, `30`, `40`, `50`, `60`).
+3.  **Masukkan Kolom (M):** Tentukan berapa kolom untuk Matriks A.
+    *   *Logika:* Jika N = 6, dan kamu input Kolom M = 3, maka otomatis Baris = 2 (karena 2 baris x 3 kolom = 6 elemen).
 
-### Tahap 4: Membersihkan Proyek (Clean-up)
+> [!IMPORTANT]
+> **Aturan Matematika Matriks:**
+> Pastikan angka **N** (total elemen) bisa dibagi habis oleh angka **M** (kolom) yang kamu masukkan.
+> Contoh: Jika total elemen 5, jangan masukkan kolom 2 (karena 5 bagi 2 sisa 1). Matriks harus kotak sempurna.
 
-Setelah selesai, Anda dapat menggunakan `make` untuk membersihkan semua file objek (`.o`) dan *executable* (`latihan_matriks`).
+### Tahap 4: Melihat Hasil (Output)
+
+Setelah program selesai, layar akan menampilkan:
+*   `Berhasil dibuat matriks A`
+*   `Berhasil dibuat matriks B`
+
+Ke mana perginya data matriks tersebut? Cek folder proyek kamu sekarang.
+
+> [!NOTE]
+> Program ini **tidak** menampilkan matriks di layar terminal hitam, melainkan menyimpannya ke dalam file teks agar lebih rapi.
+> *   Buka file **`matriksA.txt`** untuk melihat matriks asli.
+> *   Buka file **`matriksB.txt`** untuk melihat hasil transpose (baris jadi kolom).
+
+### Tahap 5: Membersihkan Proyek (Clean-up)
+
+Jika sudah selesai, kamu bisa menghapus file hasil kompilasi agar folder kembali bersih.
 
 ```bash
 make clean
@@ -70,28 +107,35 @@ make clean
 
 -----
 
-## 🔬 Pemeriksaan Memori (Debugging Tingkat Lanjut)
+## 🔬 Pemeriksaan Memori (Debugging Lanjutan)
 
-Proyek ini telah diperiksa memori menggunakan Valgrind untuk menghindari *Double Free* dan *Memory Leak*.
-
-Jika Anda ingin memeriksa program dari kesalahan memori, jalankan:
+Bagian ini opsional. Jika kamu ingin memastikan kode ini "sehat" dari kebocoran memori (*memory leak*), jalankan perintah ini (butuh install `valgrind` dulu):
 
 ```bash
 valgrind --leak-check=full ./latihan_matriks
 ```
 
-*(Pastikan Anda telah mengkompilasi dengan `make` karena flag `-g` (debugging) sudah termasuk dalam `Makefile`).*
+> [!TIP]
+> **Apa itu Memory Leak?**
+> Bayangkan kamu meminjam piring di restoran tapi lupa mengembalikannya ke dapur. Jika terus menerus, restoran kehabisan piring. `Valgrind` adalah alat untuk memastikan program kita "mengembalikan piring" (memori) setelah dipakai.
 
 -----
 
-## 🔗 Kontak
+## 🔗 Kontak & Kontribusi
 
-Jika ada pertanyaan atau saran, silakan buka *Issue* di repositori ini.
+Jika ada pertanyaan, error, atau saran, silakan:
+1.  Buka tab **Issues** di repositori ini.
+2.  Buat Issue baru dan jelaskan kendala kamu.
 
 ---
 
 ## 🎉 Penutup
+
+Terima kasih sudah mencoba proyek ini! Selamat belajar.
+
 ![Yvette Strinova](https://media.tenor.com/B-hOUdGo4s4AAAAi/yvette-strinova.gif)
+
 ---
 
-Enjoy for testing and experiment.
+*Enjoy for testing and experiment.*
+```
