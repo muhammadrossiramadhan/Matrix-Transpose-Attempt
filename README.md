@@ -1,129 +1,185 @@
-# 🚀 Panduan Proyek Matriks Transpose dengan Multi-File C
+Ini adalah versi final **README.md** yang sudah diperbarui.
 
-Proyek ini mendemonstrasikan manajemen memori dinamis di C untuk operasi array 1D dan matriks 2D (transpose) menggunakan kompilasi multi-file (`latihan.c` dan `operasi.c`) dengan `Makefile`.
+Saya telah mengganti bagian penutup dengan **Opsi 2** (GIF Anime ukuran besar) sesuai permintaanmu, digabungkan dengan struktur "Ultimate Hybrid" yang lengkap (Target Pro + Pemula).
 
-> [!NOTE]
-> Proyek ini dirancang untuk tujuan pembelajaran (edukasi), khususnya bagi yang ingin memahami bagaimana **alokasi memori** (`malloc`) bekerja dan cara membagi kode C menjadi beberapa file agar lebih rapi.
+Silakan **Copy** dan **Paste** seluruh kode di bawah ini ke file `README.md` repositori GitHub kamu.
+
+```markdown
+# 🚀 Matrix Transpose: Project C Multi-File
+
+![Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![Build](https://img.shields.io/badge/Build-GNU%20Make-brightgreen?style=for-the-badge)
+![Level](https://img.shields.io/badge/Level-Beginner%20Friendly-success?style=for-the-badge)
+
+> **Untuk Pemula:** Proyek ini adalah "Sihir Matematika" yang memutar posisi angka (baris menjadi kolom), ibarat mengubah posisi HP dari berdiri (portrait) menjadi tidur (landscape).
+>
+> **Untuk Profesional:** Implementasi *Low-Level* operasi matriks menggunakan `malloc/free` (Dynamic Memory), arsitektur modular, dan otomatisasi build via Makefile.
+
+---
+
+## 🧐 Apa yang Sebenarnya Terjadi? (Konsep Visual)
+
+Bayangkan kamu punya **Rak Telur** atau tabel angka. Program ini mengubah **Posisi Tidur** menjadi **Posisi Berdiri**.
+
+```text
+    MATRIKS A (Input)          MATRIKS B (Output)
+    -----------------          ------------------
+    [ 1 ] [ 2 ] [ 3 ]    ➡️    [ 1 ] [ 4 ]
+    [ 4 ] [ 5 ] [ 6 ]          [ 2 ] [ 5 ]
+                               [ 3 ] [ 6 ]
+```
+
+---
 
 ## 📂 Struktur Repositori
 
+File-file ini bekerja sama seperti sebuah tim:
+
 ```text
 /Tugas dan Latihan Alpro
-├── latihan.c           # File utama (main function, alokasi memori Matriks A)
-├── operasi.c           # Implementasi fungsi (printArray, printMatrix, alokasi Matriks B)
-├── tipe_data.h         # Definisi struct (Dynamic_array, Dynamic_matrix) dan prototipe fungsi
-├── makefile            # Script untuk kompilasi dan linking otomatis
-└── README.md           # Dokumen panduan ini
+├── latihan.c           # 🧠 OTAK: File utama, mengatur alur & memori.
+├── operasi.c           # 🛠️ TUKANG: Melakukan perhitungan & menulis file.
+├── tipe_data.h         # 📖 KAMUS: Daftar istilah (struct) yang dipakai.
+├── makefile            # 🤖 ROBOT: Skrip otomatis untuk menyatukan program.
+└── README.md           # ℹ️ PANDUAN: Dokumen yang sedang kamu baca ini.
 ```
 
------
+---
 
-## 🛠️ Persyaratan Sistem (Apa yang harus disiapkan?)
+## 🛠️ Persiapan: Siapkan "Dapur" Anda
 
-Sebelum memulai, pastikan komputer kamu memiliki alat-alat berikut. Jika kamu menggunakan Linux (Ubuntu/Fedora) atau WSL (Windows Subsystem for Linux), biasanya ini sudah tersedia.
+Sebelum memasak (coding), pastikan komputer memiliki alatnya (**Compiler GCC** & **Make**).
+*Pilih panduan sesuai laptop kamu:*
 
-1.  **Compiler C:** GCC (GNU Compiler Collection).
-2.  **Make Tool:** Untuk menjalankan perintah `make`.
-3.  **Terminal:** Aplikasi Command Prompt atau Terminal di Linux/Mac.
+<details>
+<summary><b>🪟 Saya Pengguna Windows (Klik Disini)</b></summary>
+<br>
+
+Disarankan menggunakan **WSL** (Linux di dalam Windows) agar standar industri.
+
+1.  Buka **PowerShell** sebagai Administrator.
+2.  Ketik: `wsl --install` lalu Enter.
+3.  Tunggu selesai, lalu **Restart Laptop**.
+4.  Buka aplikasi **Ubuntu** dari menu Start, buat username.
+5.  Ketik perintah ini:
+    ```bash
+    sudo apt update && sudo apt install build-essential valgrind
+    ```
+</details>
+
+<details>
+<summary><b>🍎 Saya Pengguna Mac (Klik Disini)</b></summary>
+<br>
+
+1.  Buka **Terminal** (Cmd + Spasi, ketik Terminal).
+2.  Ketik perintah ini:
+    ```bash
+    xcode-select --install
+    ```
+3.  Klik **Install** pada pop-up yang muncul.
+</details>
+
+<details>
+<summary><b>🐧 Saya Pengguna Linux (Klik Disini)</b></summary>
+<br>
+
+Jalankan perintah ini di terminal:
+```bash
+sudo apt update && sudo apt install build-essential make valgrind
+```
+</details>
 
 > [!TIP]
-> **Cara Cek Apakah Komputer Kamu Sudah Siap:**
-> 1. Buka terminal.
-> 2. Ketik `gcc --version` lalu Enter.
-> 3. Ketik `make --version` lalu Enter.
->
-> Jika muncul tulisan versi (misal `gcc (Ubuntu...) 9.4.0`), berarti kamu **aman**! Jika muncul "command not found", kamu perlu menginstalnya dulu.
+> **Cara Cek Apakah Kamu Siap:**
+> Ketik `gcc --version` dan `make --version` di terminal. Jika muncul angka versi, berarti aman!
 
------
+---
 
-## 💻 Panduan Menjalankan Program (Untuk Pemula)
+## ⚡ Quick Start (Jalur Cepat untuk Pro)
 
-Ikuti langkah-langkah di bawah ini secara berurutan. Jangan khawatir, kita akan melakukannya perlahan.
+Jika kamu sudah paham terminal, langsung saja:
 
-### Tahap 1: Masuk ke Folder Proyek
+1.  **Build:** `make`
+2.  **Run:** `./latihan_matriks`
+3.  **Clean:** `make clean`
+4.  **Debug:** `valgrind --leak-check=full ./latihan_matriks`
 
-Pastikan kamu sudah mendownload kode ini. Jika mendownload sebagai ZIP, ekstrak dulu. Lalu buka terminal di dalam folder tersebut.
+---
 
-### Tahap 2: Kompilasi Proyek (Membuat Program)
+## 💻 Panduan Lengkap (Jalur Pemandu untuk Pemula)
 
-Kita tidak akan mengkompilasi file satu per satu secara manual. Kita akan menggunakan `Makefile` agar otomatis.
+Ikuti langkah ini perlahan-lahan. Jangan takut salah.
 
-1.  Di dalam terminal, ketik perintah berikut lalu tekan **Enter**:
+### Tahap 1: Merakit Program
+Kita tidak mengkompilasi manual. Kita panggil robot `make`.
+
+1.  Buka Terminal di folder proyek.
+2.  Ketik perintah:
     ```bash
     make
     ```
-2.  Jika berhasil, tidak akan ada pesan error, dan akan muncul file baru bernama `latihan_matriks`.
+3.  Jika sukses, akan muncul file baru bernama `latihan_matriks`.
 
 > [!WARNING]
-> **Penting Soal `Makefile`**
-> Jika kamu mencoba mengedit file `makefile` sendiri dan mendapat pesan error `missing separator`, itu biasanya karena masalah spasi.
-> Pastikan baris perintah di dalam `makefile` (seperti di bawah `all:` atau `clean:`) menggunakan tombol **TAB**, bukan spasi biasa.
+> **Penting Soal Makefile:**
+> Jika kamu mengedit file `makefile` dan muncul error `missing separator`, itu karena spasi. Pastikan indentasi menggunakan tombol **TAB**, bukan Spasi.
 
-### Tahap 3: Menjalankan Program
+### Tahap 2: Menjalankan Program
+Panggil program yang sudah jadi:
+```bash
+./latihan_matriks
+```
 
-Sekarang program sudah siap dijalankan.
+### Tahap 3: Input Data (Ikuti Aturan Ini)
+Program akan meminta angka. Ikuti contoh ini agar sukses:
 
-1.  Ketik perintah ini di terminal:
-    ```bash
-    ./latihan_matriks
-    ```
-2.  Program akan berjalan dan meminta input dari kamu.
-
-> [!CAUTION]
-> **Hati-hati Saat Input Data**
-> Masukkan hanya **angka bulat** (integer) saat program meminta input. Jangan memasukkan huruf atau simbol aneh, karena program bisa berhenti mendadak (*crash*).
-
-**Alur Input Program:**
-1.  **Masukkan N:** Jumlah total elemen (misal: `6`).
-2.  **Masukkan Elemen:** Masukkan angka sebanyak N kali (misal: `10`, `20`, `30`, `40`, `50`, `60`).
-3.  **Masukkan Kolom (M):** Tentukan berapa kolom untuk Matriks A.
-    *   *Logika:* Jika N = 6, dan kamu input Kolom M = 3, maka otomatis Baris = 2 (karena 2 baris x 3 kolom = 6 elemen).
+1.  **Total Elemen (N):** Masukkan `6`.
+2.  **Masukkan Elemen:** Masukkan angka `1` `2` `3` `4` `5` `6` (Tekan Enter tiap angka).
+3.  **Jumlah Kolom (M):** Masukkan `3`.
 
 > [!IMPORTANT]
-> **Aturan Matematika Matriks:**
-> Pastikan angka **N** (total elemen) bisa dibagi habis oleh angka **M** (kolom) yang kamu masukkan.
-> Contoh: Jika total elemen 5, jangan masukkan kolom 2 (karena 5 bagi 2 sisa 1). Matriks harus kotak sempurna.
+> **Logika Matematika:**
+> Pastikan **Total Elemen (N)** bisa dibagi habis oleh **Kolom (M)**.
+> *   ✅ Benar: Elemen 6, Kolom 3 (Baris jadi 2).
+> *   ❌ Salah: Elemen 5, Kolom 2 (Sisa 1, error logika).
 
-### Tahap 4: Melihat Hasil (Output)
+> [!CAUTION]
+> **Hati-hati:** Masukkan hanya **angka bulat**. Jangan huruf, nanti program bingung (*crash*).
 
-Setelah program selesai, layar akan menampilkan:
-*   `Berhasil dibuat matriks A`
-*   `Berhasil dibuat matriks B`
+### Tahap 4: Melihat Hasil
+"Kok layarnya diam saja?"
+Program ini menyimpan hasil ke dalam **File Teks** agar rapi. Cek folder kamu sekarang:
 
-Ke mana perginya data matriks tersebut? Cek folder proyek kamu sekarang.
+*   📄 **`matriksA.txt`** (Posisi Awal / Tidur).
+*   📄 **`matriksB.txt`** (Hasil Putaran / Berdiri).
 
-> [!NOTE]
-> Program ini **tidak** menampilkan matriks di layar terminal hitam, melainkan menyimpannya ke dalam file teks agar lebih rapi.
-> *   Buka file **`matriksA.txt`** untuk melihat matriks asli.
-> *   Buka file **`matriksB.txt`** untuk melihat hasil transpose (baris jadi kolom).
-
-### Tahap 5: Membersihkan Proyek (Clean-up)
-
-Jika sudah selesai, kamu bisa menghapus file hasil kompilasi agar folder kembali bersih.
-
+### Tahap 5: Bersih-bersih
+Hapus file sampah sisa kompilasi dengan perintah:
 ```bash
 make clean
 ```
 
------
+---
 
-## 🔬 Pemeriksaan Memori (Debugging Lanjutan)
+## 🔬 Deep Dive: Manajemen Memori (Info Edukasi)
 
-Bagian ini opsional. Jika kamu ingin memastikan kode ini "sehat" dari kebocoran memori (*memory leak*), jalankan perintah ini (butuh install `valgrind` dulu):
+Bagian ini untuk kamu yang ingin tahu "Bagaimana komputer bekerja?".
+
+Program ini menggunakan **Dynamic Memory Allocation (`malloc`)**.
+*   **Analogi:** Bayangkan kamu makan di restoran. Kamu "meminjam" piring (Memori). Setelah selesai makan, kamu harus mengembalikan piringnya ke dapur (`free`).
+*   **Memory Leak:** Jika kamu lupa mengembalikan piring, restoran akan kehabisan piring. Itu disebut *Memory Leak*.
+
+Jika ingin mengecek apakah program ini mengembalikan piring dengan benar, gunakan alat bernama **Valgrind**:
 
 ```bash
 valgrind --leak-check=full ./latihan_matriks
 ```
 
-> [!TIP]
-> **Apa itu Memory Leak?**
-> Bayangkan kamu meminjam piring di restoran tapi lupa mengembalikannya ke dapur. Jika terus menerus, restoran kehabisan piring. `Valgrind` adalah alat untuk memastikan program kita "mengembalikan piring" (memori) setelah dipakai.
+---
 
------
+## 🔗 Kontak & Diskusi
 
-## 🔗 Kontak & Kontribusi
-
-Jika ada pertanyaan, error, atau saran, silakan:
+Jika ada pertanyaan, error, atau saran:
 1.  Buka tab **Issues** di repositori ini.
 2.  Buat Issue baru dan jelaskan kendala kamu.
 
@@ -131,9 +187,13 @@ Jika ada pertanyaan, error, atau saran, silakan:
 
 ## 🎉 Penutup
 
-Terima kasih sudah mencoba proyek ini! Selamat belajar.
+Terima kasih sudah mencoba proyek ini! Jangan menyerah kalau ada error, coba lagi dan lagi.
 
-![Yvette Strinova](https://media.tenor.com/B-hOUdGo4s4AAAAi/yvette-strinova.gif)
+<p align="center">
+  <img src="https://media.tenor.com/B-hOUdGo4s4AAAAi/yvette-strinova.gif" alt="Semangat" width="600">
+  <br>
+  <b>Happy Coding & Keep Learning!</b>
+</p>
 
 ---
 
