@@ -184,7 +184,7 @@ Jika ada pertanyaan, error, atau saran:
 Terima kasih sudah mencoba proyek ini! Jangan menyerah kalau ada error, coba lagi dan lagi.
 
 <p align="center">
-  <img src="https://media.tenor.com/B-hOUdGo4s4AAAAi/yvette-strinova.gif" alt="Semangat" width="600">
+  <img src="./yvette-strinova.gif" alt="Semangat" width="600">
   <br>
   <b>Happy Coding & Keep Learning!</b>
 </p>
